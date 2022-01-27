@@ -7,9 +7,12 @@ set(GFLAGS_PREFER_EXPORTED_GFLAGS_CMAKE_CONFIGURATION TRUE)
 set(GLOG_PREFER_EXPORTED_GLOG_CMAKE_CONFIGURATION TRUE)
 list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 IF(APPLE)
     # Fix linking on 10.14+. See https://stackoverflow.com/questions/54068035
-    LINK_DIRECTORIES(/usr/local/lib)
+    LINK_DIRECTORIES(/usr/local/lib /opt/homebrew/lib)
 ENDIF()
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -169,10 +172,10 @@ endif(Pangolin_FOUND)
 
 target_compile_options(${PROJECT_NAME}
   PRIVATE -Wall -pipe
-  PRIVATE -march=native
+  PRIVATE -mcpu=apple-a14
 )
 
-# We would just need to say cxx_std_11 if we were using cmake 3.8
+# We would just need tc say cxx_std_11 if we were using cmake 3.8
 target_compile_features(${PROJECT_NAME} PUBLIC
         cxx_auto_type cxx_constexpr cxx_range_for cxx_nullptr cxx_override)
 
@@ -181,11 +184,13 @@ target_compile_features(${PROJECT_NAME} PUBLIC
 add_library(kimera_vio::kimera_vio ALIAS kimera_vio)
 
 add_executable(stereoVIOEuroc ./examples/KimeraVIO.cpp)
+add_executable(monoVIOEuroc ./examples/KimeraVIO2.cpp)
 target_link_libraries(stereoVIOEuroc PUBLIC kimera_vio::kimera_vio)
+target_link_libraries(monoVIOEuroc PUBLIC kimera_vio::kimera_vio)
 
 ############################### TESTS ##########################################
 ### Add testing
-option(KIMERA_BUILD_TESTS "Build tests" ON)
+option(KIMERA_BUILD_TESTS "Build tests" OFF)
 if(KIMERA_BUILD_TESTS)
   # Download and unpack googletest at configure time
   # TODO Consider doing the same for glog, gflags, although it might

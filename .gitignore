@@ -6,7 +6,8 @@
 /*/*.csv
 *.ipynb_checkpoints
 *.autosave
-
+cmake-build-debug/
+.idea/
 % Ignore VS code settings
 *.vscode
 
@@ -29,3 +30,4 @@
 
 % Ignore python bytecode
 *.pyc
+Euroc/
