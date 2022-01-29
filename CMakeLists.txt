@@ -1,8 +1,11 @@
 cmake_minimum_required (VERSION 3.5)
 project(kimera_vio VERSION 1.0 LANGUAGES CXX C)
 
+# ALG Edit: added CFLAGS using suggestion given here: https://github.com/exercism/exercism/issues/5476 to solve the linker issue
+# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target x86_64-apple-darwin21.2.0")
 # Make sure that custom modules like FindXXXX are found
 # Prefer to use system installation of gflags/glog
+# set(CMAKE_C_COMPILER "/usr/bin/gcc")
 set(GFLAGS_PREFER_EXPORTED_GFLAGS_CMAKE_CONFIGURATION TRUE)
 set(GLOG_PREFER_EXPORTED_GLOG_CMAKE_CONFIGURATION TRUE)
 list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake)
@@ -10,11 +13,11 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+
 IF(APPLE)
     # Fix linking on 10.14+. See https://stackoverflow.com/questions/54068035
-    LINK_DIRECTORIES(/usr/local/lib /opt/homebrew/lib)
+    LINK_DIRECTORIES(/usr/local/lib /opt/homebrew/lib )
 ENDIF()
-
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
