@@ -7,6 +7,10 @@
 *.ipynb_checkpoints
 *.autosave
 cmake-build-debug/
+cmake-build-minsizerel/
+cmake-build-release/
+cmake-build-relwithdebinfo/
+
 .idea/
 % Ignore VS code settings
 *.vscode
