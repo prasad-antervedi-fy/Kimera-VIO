@@ -16,13 +16,15 @@ T_BS:
 rate_hz: 100
 
 # inertial sensor noise model parameters (static)
-gyroscope_noise_density: 0.005     # [ rad / s / sqrt(Hz) ]   ( gyro "white noise" )
-gyroscope_random_walk: 4e-06       # [ rad / s^2 / sqrt(Hz) ] ( gyro bias diffusion )
-accelerometer_noise_density: 0.01  # [ m / s^2 / sqrt(Hz) ]   ( accel "white noise" )
-accelerometer_random_walk: 0.0002    # [ m / s^3 / sqrt(Hz) ].  ( accel bias diffusion )
+gyroscope_noise_density: 0.05     # [ rad / s / sqrt(Hz) ]   ( gyro "white noise" )
+gyroscope_random_walk: 4e-03       # [ rad / s^2 / sqrt(Hz) ] ( gyro bias diffusion )
+accelerometer_noise_density: 0.1  # [ m / s^2 / sqrt(Hz) ]   ( accel "white noise" )
+accelerometer_random_walk: 0.02    # [ m / s^3 / sqrt(Hz) ].  ( accel bias diffusion )
 
 
 # Extra parameters
-imu_integration_sigma: 1.0e-8
+imu_integration_sigma: 1.0e-5
 imu_time_shift: 0.0
-n_gravity: [0.0, 0.0, -9.81]
+# n_gravtiy when holding phone in general fyuse capture orientation is [-9.81, 0.0, 0.0]
+#n_gravity: [0.0, 0.0, -9.81]
+n_gravity: [-9.81, 0.0, 0.0]
